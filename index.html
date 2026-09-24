@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f19">
+  <title>BTooMax</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" data-page="home" aria-label="BTooMax Home">BTooMax</a>
+  </header>
+
+  <main id="app" class="page">
+    <section id="home" class="screen active">
+      <div class="hero">
+        <span class="eyebrow">BTooMax</span>
+        <h1>Everything you need,<br>in one place.</h1>
+        <p>A lightweight collection of useful web tools.</p>
+        <button class="primary-btn" data-page="tools">Explore Tools</button>
+      </div>
+    </section>
+
+    <section id="tools" class="screen">
+      <div class="section-head">
+        <span class="eyebrow">BTooMax</span>
+        <h2>Tools</h2>
+        <p>Useful tools will appear here.</p>
+      </div>
+      <div class="empty-state">More tools are coming soon.</div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <a href="#home" class="nav-item active" data-page="home">
+      <span class="nav-icon">⌂</span>
+      <span>Home</span>
+    </a>
+    <a href="#tools" class="nav-item" data-page="tools">
+      <span class="nav-icon">▦</span>
+      <span>Tools</span>
+    </a>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
