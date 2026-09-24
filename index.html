@@ -16,31 +16,36 @@
     <section id="home" class="screen active">
       <div class="hero">
         <span class="eyebrow">BTooMax</span>
-        <h1>Everything you need,<br>in one place.</h1>
-        <p>A lightweight collection of useful web tools.</p>
-        <button class="primary-btn" data-page="tools">Explore Tools</button>
+        <h1>Useful tools.<br>All in one place.</h1>
+        <p>Fast, simple tools made for everyday use.</p>
       </div>
+
+      <div class="search-box">
+        <span class="search-icon">⌕</span>
+        <input id="tool-search" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools">
+      </div>
+      <div id="search-results" class="search-results" aria-live="polite"></div>
+
+      <div class="section-title">
+        <h2>Popular Tools</h2>
+        <button class="text-btn" data-page="tools">See all</button>
+      </div>
+      <div id="popular-tools" class="tool-grid"></div>
     </section>
 
     <section id="tools" class="screen">
       <div class="section-head">
         <span class="eyebrow">BTooMax</span>
         <h2>Tools</h2>
-        <p>Useful tools will appear here.</p>
+        <p>Choose a tool to get started.</p>
       </div>
-      <div class="empty-state">More tools are coming soon.</div>
+      <div id="all-tools" class="tool-grid"></div>
     </section>
   </main>
 
   <nav class="bottom-nav" aria-label="Main navigation">
-    <a href="#home" class="nav-item active" data-page="home">
-      <span class="nav-icon">⌂</span>
-      <span>Home</span>
-    </a>
-    <a href="#tools" class="nav-item" data-page="tools">
-      <span class="nav-icon">▦</span>
-      <span>Tools</span>
-    </a>
+    <a href="#home" class="nav-item active" data-page="home"><span class="nav-icon">⌂</span><span>Home</span></a>
+    <a href="#tools" class="nav-item" data-page="tools"><span class="nav-icon">▦</span><span>Tools</span></a>
   </nav>
 
   <script src="script.js"></script>
