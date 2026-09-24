@@ -17,49 +17,11 @@ function canEncode(type){
 }
 
 function setupFormats(){
-  format.innerHTML="";
-  OUTPUTS.forEach(([mime,label])=>{
-    const option=document.createElement("option");
-    option.value=mime;
-    option.textContent=label;
-    option.dataset.supported=canEncode(mime)?"yes":"no";
-    if(!canEncode(mime)) option.textContent=label+" (not supported here)";
-    option.disabled=!canEncode(mime);
-    format.appendChild(option);
-  });
-  if(!format.options.length) format.innerHTML='<option value="image/png">PNG</option>';
-}ent.querySelector(s),fi=$("#file"),drop=$("#drop"),work=$("#work"),preview=$("#preview"),name=$("#name"),meta=$("#meta"),format=$("#format"),quality=$("#quality"),qv=$("#qv"),result=$("#result"),size=$("#size"),saved=$("#saved"),fill=$("#fill");let file=null,out=null,url=null;
-
-const OUTPUTS=[
-  ["image/webp","WebP","webp"],
-  ["image/avif","AVIF","avif"],
-  ["image/jpeg","JPG","jpg"],
-  ["image/png","PNG","png"]
-];
-
-const fmt=n=>n<1048576?(n/1024).toFixed(1)+" KB":(n/1048576).toFixed(2)+" MB";
-
-function canEncode(type){
-  const c=document.createElement("canvas");
-  c.width=1;c.height=1;
-  try{return c.toDataURL(type).startsWith(type==="image/jpeg"?"data:image/jpeg":type==="image/png"?"data:image/png":type==="image/webp"?"data:image/webp":type==="image/avif"?"data:image/avif":"data:")}
-  catch(e){return false}
-}
-
-function setupFormats(){
-  format.innerHTML="";
-  OUTPUTS.filter(o=>canEncode(o[0])).forEach(([mime,label])=>{
-    const option=document.createElement("option");
-    option.value=mime;option.textContent=label;
-    format.appendChild(option);
-  });
+  // Keep the native select fully interactive. Browser support is checked when compressing.
   if(!format.options.length){
-    const option=document.createElement("option");
-    option.value="image/png";option.textContent="PNG";
-    format.appendChild(option);
+    format.innerHTML='<option value="image/webp">WebP</option><option value="image/avif">AVIF</option><option value="image/jpeg">JPG</option><option value="image/png">PNG</option>';
   }
 }
-setupFormats();
 
 function load(f){
   if(!f||!f.type.startsWith("image/"))return alert("Choose an image file.");
