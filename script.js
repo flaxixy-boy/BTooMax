@@ -18,7 +18,7 @@ const popular=["calculator","qr","password","unit","word","json"];
 function card(tool){return '<a class="tool-card" href="#tools" data-tool="'+tool.id+'"><div class="tool-icon">'+tool.icon+'</div><div class="tool-name">'+tool.name+'</div><div class="tool-desc">'+tool.desc+'</div></a>'}
 function renderTools(){document.getElementById("popular-tools").innerHTML=popular.map(id=>card(tools.find(t=>t.id===id))).join("");document.getElementById("all-tools").innerHTML=tools.map(card).join("");document.getElementById("tool-count").textContent=tools.length}
 function showPage(page){const target=document.getElementById(page)||document.getElementById("home");screens.forEach(s=>s.classList.toggle("active",s===target));navItems.forEach(n=>n.classList.toggle("active",n.dataset.page===target.id));history.replaceState(null,"","#"+target.id);window.scrollTo({top:0,behavior:"smooth"})}
-function openTool(id){if(id==="image"){location.href="tools/image-compressor/compressor.html";return}showPage("tools");setTimeout(()=>document.querySelector('[data-tool="'+id+'"]')?.scrollIntoView({behavior:"smooth",block:"center"}),80)}
+function openTool(id){if(id==="image"){window.location.href="./tools/image-compressor/compressor.html";return}showPage("tools");setTimeout(()=>document.querySelector('[data-tool="'+id+'"]')?.scrollIntoView({behavior:"smooth",block:"center"}),80)}
 renderTools();
 document.addEventListener("click",e=>{const pageLink=e.target.closest("[data-page]"),tool=e.target.closest("[data-tool]");if(tool){e.preventDefault();openTool(tool.dataset.tool);return}if(pageLink){e.preventDefault();showPage(pageLink.dataset.page)}});
 const search=document.getElementById("tool-search"),results=document.getElementById("search-results");
