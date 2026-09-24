@@ -1,6 +1,5 @@
 const screens=document.querySelectorAll(".screen");
 const navItems=document.querySelectorAll(".nav-item");
-
 const tools=[
  {id:"calculator",icon:"🧮",name:"Calculator",desc:"Quick everyday calculations.",tags:"math calculate"},
  {id:"qr",icon:"▣",name:"QR Code Generator",desc:"Create QR codes from text or links.",tags:"qr code"},
@@ -16,50 +15,13 @@ const tools=[
  {id:"uuid",icon:"#",name:"UUID Generator",desc:"Generate random UUIDs.",tags:"uuid id generator"}
 ];
 const popular=["calculator","qr","password","unit","word","json"];
-
-function card(tool){
-  return '<a class="tool-card" href="#tools" data-tool="'+tool.id+'"><div class="tool-icon">'+tool.icon+'</div><div class="tool-name">'+tool.name+'</div><div class="tool-desc">'+tool.desc+'</div></a>';
-}
-function renderTools(){
-  document.getElementById("popular-tools").innerHTML=popular.map(id=>card(tools.find(t=>t.id===id))).join("");
-  document.getElementById("all-tools").innerHTML=tools.map(card).join("");
-  document.getElementById("tool-count").textContent=tools.length;
-}
-function showPage(page){
-  const target=document.getElementById(page)||document.getElementById("home");
-  screens.forEach(s=>s.classList.toggle("active",s===target));
-  navItems.forEach(n=>n.classList.toggle("active",n.dataset.page===target.id));
-  history.replaceState(null,"","#"+target.id);
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-function openTool(id){
-  showPage("tools");
-  setTimeout(()=>document.querySelector('[data-tool="'+id+'"]')?.scrollIntoView({behavior:"smooth",block:"center"}),80);
-}
-
+function card(tool){return '<a class="tool-card" href="#tools" data-tool="'+tool.id+'"><div class="tool-icon">'+tool.icon+'</div><div class="tool-name">'+tool.name+'</div><div class="tool-desc">'+tool.desc+'</div></a>'}
+function renderTools(){document.getElementById("popular-tools").innerHTML=popular.map(id=>card(tools.find(t=>t.id===id))).join("");document.getElementById("all-tools").innerHTML=tools.map(card).join("");document.getElementById("tool-count").textContent=tools.length}
+function showPage(page){const target=document.getElementById(page)||document.getElementById("home");screens.forEach(s=>s.classList.toggle("active",s===target));navItems.forEach(n=>n.classList.toggle("active",n.dataset.page===target.id));history.replaceState(null,"","#"+target.id);window.scrollTo({top:0,behavior:"smooth"})}
+function openTool(id){if(id==="image"){location.href="tools/image-compressor/compressor.html";return}showPage("tools");setTimeout(()=>document.querySelector('[data-tool="'+id+'"]')?.scrollIntoView({behavior:"smooth",block:"center"}),80)}
 renderTools();
-
-document.addEventListener("click",e=>{
-  const pageLink=e.target.closest("[data-page]");
-  const tool=e.target.closest("[data-tool]");
-  if(tool){e.preventDefault();openTool(tool.dataset.tool);return;}
-  if(pageLink){e.preventDefault();showPage(pageLink.dataset.page);}
-});
-
-const search=document.getElementById("tool-search");
-const results=document.getElementById("search-results");
-search.addEventListener("input",()=>{
-  const q=search.value.trim().toLowerCase();
-  if(!q){results.innerHTML="";return;}
-  const matches=tools.filter(t=>(t.name+" "+t.desc+" "+t.tags).toLowerCase().includes(q)).slice(0,6);
-  results.innerHTML=matches.length
-    ? matches.map(t=>'<button class="search-result" data-tool="'+t.id+'"><span class="result-icon">'+t.icon+'</span><span><strong>'+t.name+'</strong><small>'+t.desc+'</small></span></button>').join("")
-    : '<div class="search-result"><span><strong>No matching tool</strong><small>Try another keyword.</small></span></div>';
-});
-document.addEventListener("keydown",e=>{
-  if(e.key==="/" && document.activeElement!==search){e.preventDefault();search.focus();}
-  if(e.key==="Escape" && document.activeElement===search){search.value="";results.innerHTML="";search.blur();}
-});
-
-const initial=location.hash.replace("#","");
-showPage(initial==="tools"?"tools":"home");
+document.addEventListener("click",e=>{const pageLink=e.target.closest("[data-page]"),tool=e.target.closest("[data-tool]");if(tool){e.preventDefault();openTool(tool.dataset.tool);return}if(pageLink){e.preventDefault();showPage(pageLink.dataset.page)}});
+const search=document.getElementById("tool-search"),results=document.getElementById("search-results");
+search.addEventListener("input",()=>{const q=search.value.trim().toLowerCase();if(!q){results.innerHTML="";return}const matches=tools.filter(t=>(t.name+" "+t.desc+" "+t.tags).toLowerCase().includes(q)).slice(0,6);results.innerHTML=matches.length?matches.map(t=>'<button class="search-result" data-tool="'+t.id+'"><span class="result-icon">'+t.icon+'</span><span><strong>'+t.name+'</strong><small>'+t.desc+'</small></span></button>').join(""):'<div class="search-result"><span><strong>No matching tool</strong><small>Try another keyword.</small></span></div>'});
+document.addEventListener("keydown",e=>{if(e.key==="/"&&document.activeElement!==search){e.preventDefault();search.focus()}if(e.key==="Escape"&&document.activeElement===search){search.value="";results.innerHTML="";search.blur()}});
+const initial=location.hash.replace("#","");showPage(initial==="tools"?"tools":"home");
