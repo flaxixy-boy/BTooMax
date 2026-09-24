@@ -23,6 +23,7 @@ function card(tool){
 function renderTools(){
   document.getElementById("popular-tools").innerHTML=popular.map(id=>card(tools.find(t=>t.id===id))).join("");
   document.getElementById("all-tools").innerHTML=tools.map(card).join("");
+  document.getElementById("tool-count").textContent=tools.length;
 }
 function showPage(page){
   const target=document.getElementById(page)||document.getElementById("home");
@@ -52,8 +53,12 @@ search.addEventListener("input",()=>{
   if(!q){results.innerHTML="";return;}
   const matches=tools.filter(t=>(t.name+" "+t.desc+" "+t.tags).toLowerCase().includes(q)).slice(0,6);
   results.innerHTML=matches.length
-    ? matches.map(t=>'<button class="search-result" data-tool="'+t.id+'">'+t.name+'<small>'+t.desc+'</small></button>').join("")
-    : '<div class="search-result">No matching tool found.</div>';
+    ? matches.map(t=>'<button class="search-result" data-tool="'+t.id+'"><span class="result-icon">'+t.icon+'</span><span><strong>'+t.name+'</strong><small>'+t.desc+'</small></span></button>').join("")
+    : '<div class="search-result"><span><strong>No matching tool</strong><small>Try another keyword.</small></span></div>';
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="/" && document.activeElement!==search){e.preventDefault();search.focus();}
+  if(e.key==="Escape" && document.activeElement===search){search.value="";results.innerHTML="";search.blur();}
 });
 
 const initial=location.hash.replace("#","");
