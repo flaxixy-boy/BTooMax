@@ -3,51 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0f19">
-  <title>BTooMax</title>
+  <meta name="theme-color" content="#080a12">
+  <title>BTooMax — Simple tools, made better</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+
   <header class="topbar">
-    <a class="brand" href="#home" data-page="home" aria-label="BTooMax Home">BTooMax</a>
+    <a class="brand" href="#home" data-page="home" aria-label="BTooMax Home">
+      <span class="brand-mark">B</span><span>BTooMax</span>
+    </a>
+    <button class="header-tools" data-page="tools"><span>Browse</span><span class="arrow">↗</span></button>
   </header>
 
-  <main id="app" class="page">
+  <main class="page">
     <section id="home" class="screen active">
       <div class="hero">
-        <span class="eyebrow">BTooMax</span>
-        <h1>Useful tools.<br>All in one place.</h1>
-        <p>Fast, simple tools made for everyday use.</p>
+        <div class="hero-badge"><span class="status-dot"></span> Free &amp; lightweight tools</div>
+        <h1>Small tools.<br><span>Big utility.</span></h1>
+        <p>Useful web tools for everyday tasks, without the clutter.</p>
       </div>
 
-      <div class="search-box">
-        <span class="search-icon">⌕</span>
-        <input id="tool-search" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools">
+      <div class="search-wrap">
+        <div class="search-box">
+          <span class="search-icon">⌕</span>
+          <input id="tool-search" type="search" placeholder="Search a tool..." autocomplete="off" aria-label="Search tools">
+          <kbd>/</kbd>
+        </div>
+        <div id="search-results" class="search-results" aria-live="polite"></div>
       </div>
-      <div id="search-results" class="search-results" aria-live="polite"></div>
 
       <div class="section-title">
-        <h2>Popular Tools</h2>
-        <button class="text-btn" data-page="tools">See all</button>
+        <div><span class="section-kicker">QUICK ACCESS</span><h2>Popular tools</h2></div>
+        <button class="text-btn" data-page="tools">View all <span>→</span></button>
       </div>
       <div id="popular-tools" class="tool-grid"></div>
+
+      <div class="mini-banner">
+        <div class="banner-icon">✦</div>
+        <div><strong>More tools are on the way</strong><span>New utilities will be added regularly.</span></div>
+        <span class="banner-arrow">→</span>
+      </div>
     </section>
 
     <section id="tools" class="screen">
-      <div class="section-head">
-        <span class="eyebrow">BTooMax</span>
-        <h2>Tools</h2>
-        <p>Choose a tool to get started.</p>
+      <div class="tools-heading">
+        <div><span class="section-kicker">BTOOMAX TOOLKIT</span><h2>All tools</h2><p>Pick a tool and get straight to work.</p></div>
+        <div class="tool-count"><strong id="tool-count">12</strong><span>tools</span></div>
       </div>
-      <div id="all-tools" class="tool-grid"></div>
+      <div id="all-tools" class="tool-grid all-tools-grid"></div>
     </section>
   </main>
 
   <nav class="bottom-nav" aria-label="Main navigation">
     <a href="#home" class="nav-item active" data-page="home"><span class="nav-icon">⌂</span><span>Home</span></a>
-    <a href="#tools" class="nav-item" data-page="tools"><span class="nav-icon">▦</span><span>Tools</span></a>
+    <a href="#tools" class="nav-item" data-page="tools"><span class="nav-icon">✦</span><span>Tools</span></a>
   </nav>
-
   <script src="script.js"></script>
 </body>
 </html>
